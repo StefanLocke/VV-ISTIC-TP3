@@ -34,7 +34,7 @@ class StringUtilsTest {
 
     @Test
     void isBalancedTest_2() throws StringUtils.EmptyInitialSetException, StringUtils.SymbolNotInSetException {
-        assertFalse(stringUtils.isBalanced("{([)]"));
+        assertFalse(stringUtils.isBalanced("{([{)]"));
     }
 
     @Test
@@ -46,4 +46,34 @@ class StringUtilsTest {
     void isBalancedTest_4() throws StringUtils.EmptyInitialSetException, StringUtils.SymbolNotInSetException {
         assertFalse(stringUtils.isBalanced("]["));
     }
+
+    @Test
+    void isBalancedExceptionTest_1(){
+        stringUtils.setCharacterMap(new HashMap<>());
+        assertThrowsExactly(StringUtils.EmptyInitialSetException.class,()->stringUtils.isBalanced("{[][]}({})"));
+    }
+
+    @Test
+    void isBalancedExceptionTest_2(){
+        assertThrowsExactly(StringUtils.SymbolNotInSetException.class,()->stringUtils.isBalanced("{[ABBA][XX]}({})"));
+    }
+
+    @Test
+    void isBalancedExceptionTest_3() throws StringUtils.WrongInitialSetException, StringUtils.EmptyInitialSetException {
+        assertThrowsExactly(StringUtils.WrongInitialSetException.class,()->stringUtils.initFromStrings("() {} [] AB XYZ".split(" ")));
+    }
+
+    @Test
+    void pitCompletionTest_1(){
+        assertTrue(stringUtils.isCorrespondingSymbol('(',')'));
+        assertFalse(stringUtils.isCorrespondingSymbol('[','}'));
+        assertFalse(stringUtils.isCorrespondingSymbol('a','}'));
+        assertFalse(stringUtils.isCorrespondingSymbol('[','b'));
+    }
+
+    @Test
+    void pitCompletionTest_2() throws StringUtils.SymbolNotInSetException, StringUtils.EmptyInitialSetException {
+        assertFalse(stringUtils.isBalanced("[}}"));
+    }
+
 }

@@ -27,15 +27,15 @@ public class StringUtils {
         }
     }
 
-    private boolean isOpeningSymbol(char c){
+    public boolean isOpeningSymbol(char c){
         return this.characterMap.containsKey(c);
     }
 
-    private boolean isClosingSymbol(char c){
+    public boolean isClosingSymbol(char c){
         return this.characterMap.containsValue(c);
     }
 
-    private boolean isCorrespondingSymbol(char open,char close){
+    public boolean isCorrespondingSymbol(char open,char close){
         return (characterMap.containsKey(open) &&characterMap.get(open).equals(close) );
     }
 
@@ -45,7 +45,9 @@ public class StringUtils {
         for (Character c : str.toCharArray()){
             if(isOpeningSymbol(c)){
                 queue.addLast(c);
-            }else if(isClosingSymbol(c) && !queue.isEmpty() && isCorrespondingSymbol(queue.getLast(),c)){
+            }else if(isClosingSymbol(c)
+                    && !queue.isEmpty()
+                    && isCorrespondingSymbol(queue.getLast(),c)){
                 queue.removeLast();
             }else if (!isOpeningSymbol(c) && !isClosingSymbol(c)) throw new SymbolNotInSetException(c);
         }
