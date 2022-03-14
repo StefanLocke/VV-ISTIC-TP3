@@ -78,3 +78,4 @@ Use the project in [tp3-balanced-strings](../code/tp3-balanced-strings) to compl
       PRIMITIVE_RETURN_VALS_MUTATOR
       VOID_METHOD_CALL_MUTATOR
 ```
+![PIT statistics results](media/pit--results.png)
