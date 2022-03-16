@@ -180,4 +180,51 @@ class DateTest {
         Date date = new Date(1,MARS,2013);
         assertEquals(-1,date.compareTo(date.nextDate()));
     }
+
+    @Test
+    public void inputSpacePartitionning_1(){
+        Date date = new Date(-1,JANVIER,2000);
+        assertFalse(date.isValidDate());
+    }
+    @Test
+    public void inputSpacePartitionning_2(){
+        Date date = new Date(0,JANVIER,2000);
+        assertFalse(date.isValidDate());
+    }
+    @Test
+    public void inputSpacePartitionning_3(){
+        Date date = new Date(1,JANVIER,2000);
+        assertTrue(date.isValidDate());
+    }
+
+    @Test
+    public void inputSpacePartitionning_4(){
+        Date date = new Date(1,-1,2000);
+        assertFalse(date.isValidDate());
+    }
+    @Test
+    public void inputSpacePartitionning_5(){
+        Date date = new Date(1,0,2000);
+        assertFalse(date.isValidDate());
+    }
+    @Test
+    public void inputSpacePartitionning_6(){
+        Date date = new Date(1,JANVIER,2000);
+        assertTrue(date.isValidDate());
+    }
+    @Test
+    public void inputSpacePartitionning_7(){
+        Date date = new Date(-1,JANVIER,2000);
+        assertFalse(date.isValidDate());
+    }
+    @Test
+    public void inputSpacePartitionning_8(){
+        Date date = new Date(0,JANVIER,2000);
+        assertFalse(date.isValidDate());
+    }
+    @Test
+    public void inputSpacePartitionning_9(){
+        Date date = new Date(1,JANVIER,2000);
+        assertTrue(date.isValidDate());
+    }
 }

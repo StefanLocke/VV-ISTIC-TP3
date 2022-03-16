@@ -22,7 +22,8 @@ class BinaryHeapTest {
                 return -1;
             }
         };
-        heap = new IntegerHeap(comparator);
+        Exception e = new NotSuchElementException() {};
+        heap = new BinaryHeap(comparator,e);
     }
 
     @Test
@@ -32,7 +33,7 @@ class BinaryHeapTest {
     }
 
     @Test
-    void binaryHeapPushTest_2() {
+    void binaryHeapPushTest_2() throws Throwable {
         heap.push(1);
         assertEquals(1,heap.peek());
     }
@@ -71,7 +72,7 @@ class BinaryHeapTest {
 //    }
 
     @Test
-    void binaryHeapPeekTest_1() {
+    void binaryHeapPeekTest_1() throws Throwable {
         int minimum = 1;
         heap.push(minimum);
         heap.push(minimum*2);

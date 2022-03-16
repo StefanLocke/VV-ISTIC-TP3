@@ -1,18 +1,18 @@
 package fr.istic.vv;
 
-import lombok.RequiredArgsConstructor;
-
 import java.util.Comparator;
 
-class BinaryHeap<T,NotSuchElementException extends Throwable> {
+class BinaryHeap<T, E extends Throwable> {
 
     T value;
-    BinaryHeap<T,NotSuchElementException> leftChild;
-    BinaryHeap<T,NotSuchElementException> rightChild;
+    BinaryHeap<T, E> leftChild;
+    BinaryHeap<T, E> rightChild;
 
     Comparator<T> comparator;
+    Throwable exception;
 
-    public BinaryHeap(Comparator<T> comparator) {
+    public BinaryHeap(Comparator<T> comparator, Throwable E) {
+        this.exception = E;
         this.comparator = comparator;
     }
 
@@ -21,8 +21,9 @@ class BinaryHeap<T,NotSuchElementException extends Throwable> {
         return value;
     }
 
-    public T peek() {
+    public T peek() throws Throwable {
         // TODO
+        if (value==null) throw exception;
         return value;
     }
 
@@ -32,19 +33,22 @@ class BinaryHeap<T,NotSuchElementException extends Throwable> {
         switch (comparator.compare(value,element)){
             case 0 : this.value = element; break;
             case -1:
-                if (this.leftChild==null) this.leftChild = new BinaryHeap<T,NotSuchElementException>(comparator);
+                if (this.leftChild==null) this.leftChild = new BinaryHeap<T, E>(comparator,exception);
                 this.leftChild.push(element);
                 break;
             case 1 :
-                if (this.rightChild==null) this.rightChild = new BinaryHeap<T,NotSuchElementException>(comparator);
+                if (this.rightChild==null) this.rightChild = new BinaryHeap<T, E>(comparator,exception);
                 this.rightChild.push(element);
                 break;
         }
     }
 
     public int count(){
-        // TODO
-        return 0;
+        int result = 0;
+        if(value != null) result++;
+        if(leftChild != null) result+= leftChild.count();
+        if(rightChild != null) result+= rightChild.count();
+        return result;
     }
 
 }
